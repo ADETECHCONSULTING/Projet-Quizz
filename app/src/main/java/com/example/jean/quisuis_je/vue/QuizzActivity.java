@@ -2,7 +2,10 @@ package com.example.jean.quisuis_je.vue;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -40,6 +43,8 @@ public class QuizzActivity extends AppCompatActivity {
     private TextView txtScore;
     private int score = 0;
     private Button btnSuivant;
+    private TextView txtCompteur;
+    private CountDownTimer compteur;
     private Button btnPrecedent;
     private int questionActuel = 0;
     private int countQuizz;
@@ -53,6 +58,7 @@ public class QuizzActivity extends AppCompatActivity {
         controle = Controle.getInstance(this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +70,9 @@ public class QuizzActivity extends AppCompatActivity {
         txtQuestion = (TextView) findViewById(R.id.txtQuestionDetail);
         rdGroupe = (RadioGroup) findViewById(R.id.radioGroup);
         option0 = (RadioButton) findViewById(R.id.radio0);
-        chrono = (Chronometer) findViewById(R.id.chronoQuizz);
         option1 = (RadioButton) findViewById(R.id.radio1);
         option2 = (RadioButton) findViewById(R.id.radio2);
+        txtCompteur = (TextView) findViewById(R.id.txtCompteur);
         option3 = (RadioButton) findViewById(R.id.radio3);
         btnAccueil = (ImageView) findViewById(R.id.btnAccueil);
         btnSuivant = (Button) findViewById(R.id.btnSuivant);
@@ -79,7 +85,17 @@ public class QuizzActivity extends AppCompatActivity {
         option1.setText(choixReponses[1]);
         option2.setText(choixReponses[2]);
         option3.setText(choixReponses[3]);
+        compteur = new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long minuteur) {
+                txtCompteur.setText(""+minuteur/1000);
+            }
 
+            @Override
+            public void onFinish() {
+                Toast.makeText(QuizzActivity.this, "Fini !", Toast.LENGTH_SHORT).show();
+            }
+        }.start();
 
         /**
          * Evenement du bouton suivant
