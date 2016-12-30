@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Qui suis-je?</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="action_settings">Reglages</string>
+
+    <string name="title_activity_quiz">Quiz Questions</string>
+
+    <string name="suivant"> Suivant </string>
+
+    <string name="precedent"> Precedent </string>
+
+</resources>
