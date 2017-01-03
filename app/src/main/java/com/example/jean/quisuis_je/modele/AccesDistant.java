@@ -38,7 +38,7 @@ public class AccesDistant implements AsyncResponse {
         Log.d("****", "Message[0] == TabMessage[0] ? "+message[0].substring(2).equals(tabMessage[0].trim()));
         if(message.length > 1){
             //Si message[0](tous) == tabMessage[0](tous)
-            if(message[0].substring(2).equals(tabMessage[0])){
+            if(message[0].substring(2).equals(tabMessage[0].trim())){
                 try {
                     ArrayList<Quizz> lesQuestions = new ArrayList<Quizz>();
                     Log.d("******", "Message : " + message[0]);
@@ -48,6 +48,7 @@ public class AccesDistant implements AsyncResponse {
                         lesQuestions.add(new Quizz(quizzJson.getInt("id"), quizzJson.getString("question"), quizzJson.getString("choix"), quizzJson.getInt("reponse"),quizzJson.getString("indice")));
                     }
                     Log.d("Creation des questions", "****" + lesQuestions);
+                    controle.cleanLesQuestions(controle.getLesQuestions());
                     controle.setLesQuestions(lesQuestions);
                 } catch (Exception e) {
                     Log.d("Erreur", "***" + e);
@@ -64,6 +65,7 @@ public class AccesDistant implements AsyncResponse {
                         JSONObject themeJson = info.getJSONObject(i);
                         lesThemes.add(new Theme(themeJson.getInt("idTheme"),themeJson.getString("libelle")));
                     }
+                    controle.cleanLesQuestions(controle.getLesQuestions());
                     controle.setLesThemes(lesThemes);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -80,6 +82,7 @@ public class AccesDistant implements AsyncResponse {
                         lesQuestions.add(new Quizz(quizzJson.getInt("id"), quizzJson.getString("question"), quizzJson.getString("choix"), quizzJson.getInt("reponse"),quizzJson.getString("indice")));
                     }
                     Log.d("Creation des questions", "****" + lesQuestions);
+                    controle.cleanLesQuestions(controle.getLesQuestions());
                     controle.setLesQuestions(lesQuestions);
                 } catch (Exception e) {
                     Log.d("Erreur", "***" + e);
@@ -96,6 +99,7 @@ public class AccesDistant implements AsyncResponse {
                         lesQuestions.add(new Quizz(quizzJson.getInt("id"), quizzJson.getString("question"), quizzJson.getString("choix"), quizzJson.getInt("reponse"),quizzJson.getString("indice")));
                     }
                     Log.d("Creation des questions", "****" + lesQuestions);
+                    controle.cleanLesQuestions(controle.getLesQuestions());
                     controle.setLesQuestions(lesQuestions);
                 } catch (Exception e) {
                     Log.d("Erreur", "***" + e);
@@ -112,6 +116,7 @@ public class AccesDistant implements AsyncResponse {
                         lesQuestions.add(new Quizz(quizzJson.getInt("id"), quizzJson.getString("question"), quizzJson.getString("choix"), quizzJson.getInt("reponse"),quizzJson.getString("indice")));
                     }
                     Log.d("Creation des questions", "****" + lesQuestions);
+                    controle.cleanLesQuestions(controle.getLesQuestions());
                     controle.setLesQuestions(lesQuestions);
                 } catch (Exception e) {
                     Log.d("Erreur", "***" + e);

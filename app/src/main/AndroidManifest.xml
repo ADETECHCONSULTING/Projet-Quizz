@@ -20,7 +20,7 @@
         <activity android:name=".vue.QuizzActivity" />
         <activity android:name=".vue.ThemeActivity" />
         <activity android:name=".vue.ResultatActivity" />
-        <activity android:name=".vue.DetailActivity"></activity>
+        <activity android:name=".vue.DetailActivity" />
     </application>
 
 </manifest>

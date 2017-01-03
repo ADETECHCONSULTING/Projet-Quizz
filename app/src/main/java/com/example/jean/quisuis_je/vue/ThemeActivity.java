@@ -28,6 +28,10 @@ public class ThemeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void onStart(){
+        super.onStart();
         creerListe();
     }
 
@@ -38,7 +42,4 @@ public class ThemeActivity extends AppCompatActivity {
         ThemeListAdapter adapter = new ThemeListAdapter(ThemeActivity.this, lesThemes);
         listView.setAdapter(adapter);
     }
-
-
-
 }

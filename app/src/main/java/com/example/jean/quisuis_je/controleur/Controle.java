@@ -71,6 +71,10 @@ public final class Controle {
         Log.d("*****", "TAG theme"+this.lesThemes);
     }
 
+    public void cleanLesQuestions(ArrayList<Quizz> lesQuestions){
+        lesQuestions.clear();
+    }
+
     public void envoiAccesDistant(String name){
         accesDistant.envoi(name, new JSONArray());
     }

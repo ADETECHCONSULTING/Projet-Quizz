@@ -63,39 +63,46 @@ public class QuizzActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizz);
-        lesQuestions = new ArrayList<Quizz>();
-        lesQuestions = controle.getLesQuestions();
-        Collections.shuffle(lesQuestions);
-        countQuizz = lesQuestions.size();
-        txtQuestion = (TextView) findViewById(R.id.txtQuestionDetail);
-        rdGroupe = (RadioGroup) findViewById(R.id.radioGroup);
-        option0 = (RadioButton) findViewById(R.id.radio0);
-        option1 = (RadioButton) findViewById(R.id.radio1);
-        option2 = (RadioButton) findViewById(R.id.radio2);
-        txtCompteur = (TextView) findViewById(R.id.txtCompteur);
-        option3 = (RadioButton) findViewById(R.id.radio3);
-        btnAccueil = (ImageView) findViewById(R.id.btnAccueil);
-        btnSuivant = (Button) findViewById(R.id.btnSuivant);
-        btnPrecedent = (Button) findViewById(R.id.btnPrecedent);
-        btnIndice = (Button) findViewById(R.id.btnIndice);
-        Log.d(TAG, "*** "+countQuizz);
-        txtQuestion.setText(lesQuestions.get(questionActuel).getQuestion());
-        String[] choixReponses = lesQuestions.get(questionActuel).getChoix().split(",");
-        option0.setText(choixReponses[0]);
-        option1.setText(choixReponses[1]);
-        option2.setText(choixReponses[2]);
-        option3.setText(choixReponses[3]);
-        compteur = new CountDownTimer(10000, 1000) {
-            @Override
-            public void onTick(long minuteur) {
-                txtCompteur.setText(""+minuteur/1000);
-            }
+        try {
+            lesQuestions = new ArrayList<Quizz>();
+            lesQuestions = controle.getLesQuestions();
+            Collections.shuffle(lesQuestions);
+            countQuizz = lesQuestions.size();
+            txtQuestion = (TextView) findViewById(R.id.txtQuestionDetail);
+            rdGroupe = (RadioGroup) findViewById(R.id.radioGroup);
+            option0 = (RadioButton) findViewById(R.id.radio0);
+            option1 = (RadioButton) findViewById(R.id.radio1);
+            option2 = (RadioButton) findViewById(R.id.radio2);
+            txtCompteur = (TextView) findViewById(R.id.txtCompteur);
+            option3 = (RadioButton) findViewById(R.id.radio3);
+            btnAccueil = (ImageView) findViewById(R.id.btnAccueil);
+            btnSuivant = (Button) findViewById(R.id.btnSuivant);
+            btnPrecedent = (Button) findViewById(R.id.btnPrecedent);
+            btnIndice = (Button) findViewById(R.id.btnIndice);
+            Log.d(TAG, "*** " + countQuizz);
+            txtQuestion.setText(lesQuestions.get(questionActuel).getQuestion());
 
-            @Override
-            public void onFinish() {
-                Toast.makeText(QuizzActivity.this, "Fini !", Toast.LENGTH_SHORT).show();
-            }
-        }.start();
+            String[] choixReponses = lesQuestions.get(questionActuel).getChoix().split(",");
+            option0.setText(choixReponses[0]);
+            option1.setText(choixReponses[1]);
+            option2.setText(choixReponses[2]);
+            option3.setText(choixReponses[3]);
+            compteur = new CountDownTimer(30000, 1000) {
+                @Override
+                public void onTick(long minuteur) {
+                    txtCompteur.setText("" + minuteur / 1000);
+                }
+
+                @Override
+                public void onFinish() {
+                    Intent intentRes = new Intent(QuizzActivity.this, ResultatActivity.class);
+                    intentRes.putExtra("score", score);
+                    startActivity(intentRes);
+                }
+            }.start();
+        }catch (Exception e){
+            Toast.makeText(this, "Erreur : "+e, Toast.LENGTH_SHORT).show();
+        }
 
         /**
          * Evenement du bouton suivant
@@ -111,7 +118,7 @@ public class QuizzActivity extends AppCompatActivity {
                                                   btnIndice.setClickable(true);
                                                   score += 20;
                                                   //lesBonnesReponses.add(lesQuestions.get(questionActuel));
-                                                  if (questionActuel == countQuizz) {
+                                                  if (questionActuel == countQuizz-1) {
                                                       Intent intentRes = new Intent(QuizzActivity.this, ResultatActivity.class);
                                                       intentRes.putExtra("score", score);
                                                       controle.setLesBonnesReponse(lesBonnesReponses);
@@ -129,7 +136,8 @@ public class QuizzActivity extends AppCompatActivity {
                                               } else {
                                                   questionActuel++;
                                                   score += -10;
-                                                  if (questionActuel == countQuizz) {
+                                                  Log.d("TAG***",""+questionActuel);
+                                                  if (questionActuel == countQuizz - 1) {
                                                       Intent intentRes = new Intent(QuizzActivity.this, ResultatActivity.class);
                                                       intentRes.putExtra("score", score);
                                                       startActivity(intentRes);
@@ -210,7 +218,6 @@ public class QuizzActivity extends AppCompatActivity {
         });
 
     }
-
     /**
      * Methode qui decoche tous les boutons radios
      */
@@ -258,9 +265,6 @@ public class QuizzActivity extends AppCompatActivity {
 
     }
 
-    public class MonTimer{
-
-    }
 }
 
 

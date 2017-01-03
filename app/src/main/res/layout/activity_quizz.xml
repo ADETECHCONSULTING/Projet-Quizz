@@ -17,30 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:text="00"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp">
-
-            <Button
-                android:text="Un indice ?"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnIndice"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="14sp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_weight="0.03" />
-
-            <Chronometer
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/chronoQuizz"
-                android:layout_weight="0.03" />
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/txtCompteur"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="30sp"
+            android:gravity="center_vertical|center_horizontal" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -106,6 +90,18 @@
                     android:layout_weight="1" />
 
             </RadioGroup>
+
+            <Button
+                android:text="Un indice ?"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnIndice"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="14sp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="0.03" />
         </LinearLayout>
 
         <LinearLayout
